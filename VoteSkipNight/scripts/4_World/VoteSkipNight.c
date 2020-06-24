@@ -32,7 +32,30 @@ class VoteSkipNight
 		//Print("Reset Data!");
 	}
 
-	static void AnnounceFail()
+	/*static void SyncVoteData()
+	{
+		Print("Ran SyncVoteData");
+		foreach ( Man player: CurrentArrayOfPlys )
+		{
+			PlayerBase m_Player;
+			m_Player = PlayerBase.Cast(player);
+
+			Print("looped ply");
+
+			for ( int j = 0; j < VotePool.Count(); ++j )
+			{
+				string ply_id = VotePool.Get(j);
+				Print("looped voters");
+				
+				Print(ply_id);
+				ScriptRPC rpc = new ScriptRPC();
+				rpc.Write( ply_id );
+				rpc.Send( m_Player, VOTE_NIGHT.SKIPNIGHT_NOTIFY_FAIL, true, m_Player.GetIdentity()) ;
+			}
+		}
+	}*/
+
+	/*static void AnnounceFail()
 	{
 		foreach ( Man player: CurrentArrayOfPlys )
 		{
@@ -40,12 +63,11 @@ class VoteSkipNight
 			m_Player = PlayerBase.Cast(player);
 
 			ScriptRPC rpc = new ScriptRPC();
-			rpc.Write("fail");
-			rpc.Send( m_Player, VOTE_NIGHT.SKIPNIGHT_NOTIFY, true, m_Player.GetIdentity()) ;
+			rpc.Write( VotePool.Count() );
+			rpc.Write( Math.Ceil( CurrentNumOfPlys * 0.75 ) );
+			rpc.Send( m_Player, VOTE_NIGHT.SKIPNIGHT_NOTIFY_FAIL, true, m_Player.GetIdentity()) ;
 		}
-
-		ResetVotingData();
-	}
+	}*/
 
 	static void AnnounceWin()
 	{
@@ -72,13 +94,12 @@ class VoteSkipNight
 	{
 		if ( VotePool.Count() >= Math.Ceil( CurrentNumOfPlys * 0.75 ) )
 		{
-			GetGame().GetCallQueue( CALL_CATEGORY_SYSTEM ).CallLater( VoteSkipNight.AnnounceWin, 10000, false );
+			GetGame().GetCallQueue( CALL_CATEGORY_SYSTEM ).CallLater( VoteSkipNight.AnnounceWin, 5000, false );
 			m_HasVoteEnded = true;
 		}
-		else
+		/*else
 		{
-			GetGame().GetCallQueue( CALL_CATEGORY_SYSTEM ).CallLater( VoteSkipNight.AnnounceFail, 10000, false );
-			m_HasVoteEnded = true;
-		}
+			VoteSkipNight.AnnounceFail();
+		}*/
 	}
 }
