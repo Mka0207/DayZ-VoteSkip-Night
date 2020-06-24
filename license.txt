@@ -1,4 +1,5 @@
+This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License. 
+To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-nd/4.0/.
+
 This mod was created by Mka0207 for FWKZT.com
-Any repacking / reuploading / modifying / monetization of this project is prohibited.
-The source code is at https://github.com/Mka0207/DayZ-VoteSkip-Night for learning purposes.
 To join us in our efforts to create a fun dayz server, visit us here : https://discord.io/fwkztdayz
