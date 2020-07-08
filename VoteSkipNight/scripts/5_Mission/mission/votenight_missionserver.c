@@ -30,7 +30,7 @@ modded class MissionServer extends MissionBase
 					if ( play )
 					{
 						Param1<string> params2;
-						params2 = new Param1<string>( "[ VoteNight ] You can type /skip to advance to daytime." );
+						params2 = new Param1<string>( "[ VoteNight ] You can type !skip to advance to daytime." );
 						play.RPCSingleParam( ERPCs.RPC_USER_ACTION_MESSAGE, params2, true, play.GetIdentity() );
 					}
 				}

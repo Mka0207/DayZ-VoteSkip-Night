@@ -37,22 +37,21 @@ modded class PlayerBase extends ManBase
 				}
 			}
 
-			/*if (rpc_type == VOTE_NIGHT.SKIPNIGHT_NOTIFY_FAIL)
-			{
-				int votes_in_pool;
-				int votes_remaning_till_win;
-				ctx.Read(votes_in_pool);
-				ctx.Read(votes_remaning_till_win);
+			if (rpc_type == VOTE_NIGHT.SKIPNIGHT_NOTIFY_FAIL)
+			{								
+				this.Message("[ VoteNight ] Error! duplicate vote canceled.", "colorAction");
+			}
 
-				this.Message("[ VoteNight ] "+votes_in_pool+"/"+votes_remaning_till_win+" votes remaining until daylight is forced", "colorAction");
-			}*/
-
-			/*if (rpc_type == VOTE_NIGHT.SKIPNIGHT_SYNC_VOTEPOOL)
+			if (rpc_type == VOTE_NIGHT.SKIPNIGHT_SYNC_VOTEPOOL)
 			{
-				string voter_id;
-				ctx.Read(voter_id);
-				VotePool.Insert(voter_id);
-			}*/						
+				int votes_left = 0;
+				ctx.Read(votes_left);
+
+				if ( votes_left > 0 )
+				{	
+					this.Message("[ VoteNight ] "+votes_left+" votes until Night is forced.", "colorAction");
+				}
+			}
 		}
 
 		if ( GetGame().IsServer() )
@@ -67,20 +66,31 @@ modded class PlayerBase extends ManBase
 						if ( !VoteSkipNight.m_HasVoteEnded )
 						{
 							VoteSkipNight.VotePool.Insert( sender.GetId() );
-							//VoteSkipNight.SyncVoteData();
-							
 							VoteSkipNight.UpdatePlayerCount();
 							VoteSkipNight.CalculateVoteWinner();
+
+							int RequiredVotes = Math.Ceil( VoteSkipNight.CurrentNumOfPlys * 0.5 );
+							int CurrentNumVotes = VoteSkipNight.VotePool.Count();
+							int diff = RequiredVotes-CurrentNumVotes;
+
+							Print( RequiredVotes );
+							Print( CurrentNumVotes );
+							Print( diff );
+
+							ScriptRPC rpc2 = new ScriptRPC();
+							rpc2.Write(diff);
+							rpc2.Send( this, VOTE_NIGHT.SKIPNIGHT_SYNC_VOTEPOOL, true, this.GetIdentity()) ;
+
+							//this.RPCSingleParam( VOTE_NIGHT.SKIPNIGHT_SYNC_VOTEPOOL, new Param1<int>( 0 ), true, this.GetIdentity() );
 						}
 					}
 				}
 				else
 				{
 					Param1<string> warn;
-					warn = new Param1<string>( "[ VoteNight ] Error! duplicate vote canceled." );
-					this.RPCSingleParam( ERPCs.RPC_USER_ACTION_MESSAGE, warn, true, this.GetIdentity() );
+					warn = new Param1<string>( "" );
+					this.RPCSingleParam( VOTE_NIGHT.SKIPNIGHT_NOTIFY_FAIL, warn, true, this.GetIdentity() );
 				}
-				
 			}											
 		}
 	}

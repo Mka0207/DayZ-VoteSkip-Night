@@ -8,7 +8,7 @@ modded class ChatInputMenu extends UIScriptedMenu
 
 		if (m_edit_box.GetText() != "")
 		{
-			if ( m_edit_box.GetText() == "/skip" )
+			if ( m_edit_box.GetText() == "!skip" )
 			{
 				if ( GetGame().GetWorld().IsNight() )
 				{

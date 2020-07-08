@@ -92,7 +92,7 @@ class VoteSkipNight
 
 	static void CalculateVoteWinner()
 	{
-		if ( VotePool.Count() >= Math.Ceil( CurrentNumOfPlys * 0.75 ) )
+		if ( VotePool.Count() >= Math.Ceil( CurrentNumOfPlys * 0.5 ) )
 		{
 			GetGame().GetCallQueue( CALL_CATEGORY_SYSTEM ).CallLater( VoteSkipNight.AnnounceWin, 5000, false );
 			m_HasVoteEnded = true;

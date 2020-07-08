@@ -6,6 +6,6 @@ enum VOTE_NIGHT
 	SKIPNIGHT_NOTIFY,
 	// Server -> Client
 	SKIPNIGHT_NOTIFY_FAIL,
-	//Client -> Server
+	// Server -> Client
 	SKIPNIGHT_SYNC_VOTEPOOL,
 }
