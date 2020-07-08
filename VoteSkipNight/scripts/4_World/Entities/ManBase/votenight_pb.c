@@ -73,15 +73,16 @@ modded class PlayerBase extends ManBase
 							int CurrentNumVotes = VoteSkipNight.VotePool.Count();
 							int diff = RequiredVotes-CurrentNumVotes;
 
-							Print( RequiredVotes );
-							Print( CurrentNumVotes );
-							Print( diff );
+							//let players know how many votes are left.
+							foreach ( Man player: VoteSkipNight.CurrentArrayOfPlys )
+							{
+								PlayerBase m_Player;
+								m_Player = PlayerBase.Cast(player);
 
-							ScriptRPC rpc2 = new ScriptRPC();
-							rpc2.Write(diff);
-							rpc2.Send( this, VOTE_NIGHT.SKIPNIGHT_SYNC_VOTEPOOL, true, this.GetIdentity()) ;
-
-							//this.RPCSingleParam( VOTE_NIGHT.SKIPNIGHT_SYNC_VOTEPOOL, new Param1<int>( 0 ), true, this.GetIdentity() );
+								ScriptRPC rpc2 = new ScriptRPC();
+								rpc2.Write(diff);
+								rpc2.Send( m_Player, VOTE_NIGHT.SKIPNIGHT_SYNC_VOTEPOOL, true, m_Player.GetIdentity()) ;
+							}
 						}
 					}
 				}
