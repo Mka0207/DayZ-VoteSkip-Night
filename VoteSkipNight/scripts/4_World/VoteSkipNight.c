@@ -84,7 +84,7 @@ class VoteSkipNight
 		//Set the time to day.
 		int year, month, day, hour, minute;
 		GetGame().GetWorld().GetDate(year, month, day, hour, minute);
-		GetGame().GetWorld().SetDate(year, month, day, 10, minute);
+		GetGame().GetWorld().SetDate(year, month, day, 4, 0);
 		//Print("Time has been set to day light!");
 
 		ResetVotingData();

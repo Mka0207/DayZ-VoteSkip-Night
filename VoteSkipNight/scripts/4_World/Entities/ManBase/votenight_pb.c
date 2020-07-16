@@ -49,7 +49,7 @@ modded class PlayerBase extends ManBase
 
 				if ( votes_left > 0 )
 				{	
-					this.Message("[ VoteNight ] "+votes_left+" votes until Night is forced.", "colorAction");
+					this.Message("[ VoteNight ] "+votes_left+" votes until night is skipped.", "colorAction");
 				}
 			}
 		}
